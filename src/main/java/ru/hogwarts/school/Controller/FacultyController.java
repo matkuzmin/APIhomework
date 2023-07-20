@@ -6,6 +6,7 @@ import ru.hogwarts.school.Model.Faculty;
 import ru.hogwarts.school.Service.FacultyService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/faculty")
@@ -37,11 +38,12 @@ return facultyService.createFaculty(faculty);
         return ResponseEntity.ok(faculty1);
     }
 @DeleteMapping("{id}")
-    public Faculty deleteFaculty(@PathVariable long id) {
-        return facultyService.deleteFaculty(id);
-    }
+    public ResponseEntity deleteFaculty(@PathVariable long id) {
+        facultyService.deleteFaculty(id);
+    return ResponseEntity.ok().build();
+}
     @GetMapping("/sorted/{color}")
-    public ArrayList<Faculty> filteringByAge(@PathVariable int color){
-        return facultyService.filteringByAge(color);
+    public Collection<Faculty> filteringByColor(@PathVariable String color){
+        return facultyService.filteringByColor(color);
     }
 }
