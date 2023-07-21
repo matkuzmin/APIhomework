@@ -1,9 +1,9 @@
 package ru.hogwarts.school.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
+
 @Entity
 public class Faculty {
 
@@ -13,6 +13,8 @@ public class Faculty {
     private String name;
     private String color;
 
+    @OneToMany(mappedBy = "faculty")
+    private Collection<Student> students;
 
 
     @Override
