@@ -3,9 +3,11 @@ package ru.hogwarts.school.Controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.Model.Faculty;
+import ru.hogwarts.school.Model.Student;
 import ru.hogwarts.school.Service.FacultyService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/faculty")
@@ -18,30 +20,45 @@ public class FacultyController {
 
     @PostMapping
     public Faculty createFaculty(@RequestBody Faculty faculty) {
-return facultyService.createFaculty(faculty);
+        return facultyService.createFaculty(faculty);
     }
-@GetMapping("{id}")
+
+    @GetMapping("{id}")
     public ResponseEntity<Faculty> readFaculty(@PathVariable long id) {
         Faculty faculty = facultyService.readFaculty(id);
-        if(faculty == null){
-           return ResponseEntity.notFound().build();
+        if (faculty == null) {
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(faculty);
     }
-@PutMapping
+
+    @PutMapping
     public ResponseEntity<Faculty> updateFaculty(@RequestBody Faculty faculty) {
         Faculty faculty1 = facultyService.updateFaculty(faculty);
-        if(faculty1 == null){
+        if (faculty1 == null) {
             ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(faculty1);
     }
-@DeleteMapping("{id}")
-    public Faculty deleteFaculty(@PathVariable long id) {
-        return facultyService.deleteFaculty(id);
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteFaculty(@PathVariable long id) {
+        facultyService.deleteFaculty(id);
+        return ResponseEntity.ok().build();
     }
+
     @GetMapping("/sorted/{color}")
-    public ArrayList<Faculty> filteringByAge(@PathVariable int color){
-        return facultyService.filteringByAge(color);
+    public Collection<Faculty> filteringByColor(@PathVariable String color) {
+        return facultyService.filteringByColor(color);
+    }
+
+    @GetMapping("/find")
+    public Faculty findfaculty(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
+        return facultyService.findFaculty(name, color);
+    }
+
+    @PostMapping("/findByStudent")
+    public Faculty findFacultyStudent(@RequestBody Student student) {
+        return facultyService.findFacultyStudent(student);
     }
 }

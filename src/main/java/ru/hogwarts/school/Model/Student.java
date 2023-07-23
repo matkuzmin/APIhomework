@@ -1,17 +1,20 @@
 package ru.hogwarts.school.Model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
 public class Student {
+    @Id
+    @GeneratedValue
     private long id;
     private String name;
     private int age;
 
-    public Student(long id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
+
 
     @Override
     public boolean equals(Object o) {
