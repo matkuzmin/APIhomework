@@ -1,6 +1,5 @@
 package ru.hogwarts.school.Service;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.Model.Faculty;
 import ru.hogwarts.school.Model.Student;
@@ -39,14 +38,12 @@ public class FacultyService {
 
     public Collection<Faculty> filteringByColor(String color) {
         return facultyRepository.findAll().stream()
-                .filter(col -> col.getColor() == color)
+                .filter(col -> col.getColor().equals(color))
                 .collect(Collectors.toList());
-
-
     }
 
-    public Faculty findFaculty(String name, String color) {
-        return facultyRepository.findByNameIgnoreCaseAndColorIgnoreCase(name, color);
+    public Collection<Faculty> findFaculty(String name, String color) {
+        return facultyRepository.findFacultiesByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
 
     public Faculty findFacultyStudent(Student student) {
