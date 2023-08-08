@@ -53,9 +53,9 @@ public class StudentController {
         return studentService.findAgeBetween(min, max);
     }
 
-    @PostMapping("/faculty/")
-    public Collection<Student> findStudentsByFaculty(@RequestBody Faculty faculty) {
-        return studentService.findStudentsByFaculty(faculty);
+    @GetMapping("/faculty/{id}")
+    public Collection<Student> findStudentsByFaculty(@PathVariable Long id) {
+        return studentService.findStudentsByFaculty(id);
     }
 
     @GetMapping("/filter/{age}")
