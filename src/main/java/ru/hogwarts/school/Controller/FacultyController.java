@@ -53,7 +53,7 @@ public class FacultyController {
     }
 
     @GetMapping("/find")
-    public Faculty findfaculty(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
+    public Collection<Faculty> findfaculty(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
         return facultyService.findFaculty(name, color);
     }
 
