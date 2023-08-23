@@ -67,12 +67,29 @@ public class StudentController {
     public Integer findAvgAgeStudent() {
         return studentService.AvgAgeStudent();
     }
+
     @GetMapping("/student-count")
     public Integer getCountStudent() {
         return studentService.getCountStudent();
     }
+
     @GetMapping("/last-five-Student")
     public List<Student> getLastFiveStudent() {
         return studentService.getLastFiveStudent();
+    }
+
+    @GetMapping("/findStudentByLetter/{letter}")
+    public List<String> getStudentSortedNameUpperCase(@PathVariable Character letter) {
+        return studentService.getStudentSortedNameToUpperCase(letter);
+    }
+
+    @GetMapping("/student-AverageAge")
+    public double getAverageAgeStudent() {
+        return studentService.getAverageAgeStudent();
+    }
+
+    @GetMapping("/getSumAlgorithm")
+    public int getSumAlgorithm(){
+       return studentService.getSumAlgorithm();
     }
 }
