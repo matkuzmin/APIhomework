@@ -54,6 +54,8 @@ class FacultyControllerTest {
     private AvatarService avatarService;
     @SpyBean
     private FacultyService facultyService;
+    @SpyBean
+    private InfoController infoController;
     @InjectMocks
     private FacultyController facultyController;
 
