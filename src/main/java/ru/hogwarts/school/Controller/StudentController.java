@@ -98,6 +98,6 @@ public class StudentController {
     }
     @GetMapping("/anyUrlTwo")
     public void getThreadTwo(){
-        studentService.threadUriTwo();
+        studentService.threadUriTwoSynchronized();
     }
 }
