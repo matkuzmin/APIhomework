@@ -66,9 +66,7 @@ public class FacultyService {
         logger.info("Start findFacultyStudent");
         return facultyRepository.findAll().stream()
                 .map(Faculty::getName)
-                .sorted(Comparator.comparing(String::length).reversed())
-                .limit(1)
-                .findFirst();
+                .max(Comparator.comparing(String::length));
     }
 }
 
