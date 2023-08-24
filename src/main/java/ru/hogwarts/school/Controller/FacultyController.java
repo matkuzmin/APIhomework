@@ -55,7 +55,8 @@ public class FacultyController {
     @GetMapping("/find")
     public Collection<Faculty> findFaculty(@RequestParam(required = false) String name, @RequestParam(required = false) String color) {
         return facultyService.findFaculty(name, color);
-    }@GetMapping("/find")
+    }
+    @GetMapping("/findLongName")
     public Optional<String> findLongestName() {
         return facultyService.findLongestNameFaculty();
     }

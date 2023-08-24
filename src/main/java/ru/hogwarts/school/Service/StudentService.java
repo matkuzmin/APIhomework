@@ -19,7 +19,8 @@ public class StudentService {
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
-
+int count = 0;
+    Object flag = new Object();
     public Student createStudent(Student student) {
         logger.info("Start createStudent");
         return studentRepository.save(student);
@@ -96,5 +97,43 @@ public class StudentService {
                 .limit(1_000_000)
                 .reduce(0, (a, b) -> a + b );
         return sum;
+    }
+    public void threadUri(){
+        int a = 0;
+       List<Student> students = studentRepository.findAll();
+        System.out.println(students.get(0).getName());
+        System.out.println(students.get(1).getName());
+
+       Thread thread = new Thread(() ->{
+           System.out.println(students.get(2).getName());
+           System.out.println(students.get(3).getName());
+       });
+      Thread thread2 = new Thread(() ->{
+           System.out.println(students.get(4).getName());
+           System.out.println(students.get(5).getName());
+       });
+      thread.start();
+      thread2.start();
+    }
+    public void threadUriTwoSynchronized(){
+       List<Student> students = studentRepository.findAll();
+        printStud(students);
+        printStud(students);
+        Thread thread = new Thread(() ->{
+            printStud(students);
+            printStud(students);
+        });
+        Thread thread2 = new Thread(() ->{
+            printStud(students);
+            printStud(students);
+        });
+
+
+    }
+    public void printStud(List<Student> students){
+        synchronized (flag) {
+            System.out.println(students.get(count).getName());
+            count++;
+        }
     }
 }

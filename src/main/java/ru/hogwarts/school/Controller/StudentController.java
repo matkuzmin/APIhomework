@@ -92,4 +92,12 @@ public class StudentController {
     public int getSumAlgorithm(){
        return studentService.getSumAlgorithm();
     }
+    @GetMapping("/anyUrl")
+    public void getThread(){
+        studentService.threadUri();
+    }
+    @GetMapping("/anyUrlTwo")
+    public void getThreadTwo(){
+        studentService.threadUriTwo();
+    }
 }
